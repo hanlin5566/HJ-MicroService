@@ -1,0 +1,5 @@
+/target/
+/HJ-ConfigCenter/.mvn/wrapper/*.jar
+*.project
+*.jar
+/HJ-ConfigCenter/.mvn/wrapper/maven-wrapper.jar
