@@ -5,7 +5,7 @@
 
 	<groupId>com.hzcf</groupId>
 	<artifactId>HJ-ServiceCenter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>HJ-ServiceCenter</name>
 
@@ -28,6 +28,33 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		 <!--启用undertow容器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -74,7 +101,7 @@
                     <!--打jar时排除编译完成的classes目录下的一些文件-->
                     <excludes>
                         <exclude>application*.properties</exclude>
-                        <exclude>logback.xml</exclude>
+                        <!-- <exclude>logback.xml</exclude> -->
                         <exclude>bin/**</exclude>
                     </excludes>
                 </configuration>
