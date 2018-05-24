@@ -5,7 +5,7 @@
 
 	<groupId>com.hzcf</groupId>
 	<artifactId>provider</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>HJ-Provider</name>
 
@@ -38,6 +38,12 @@
         <dependency>
         	<groupId>com.hzcf</groupId>
 			<artifactId>HJ-ServiceInterface</artifactId>
+			<version>1.0</version>
+        </dependency>
+     	<!-- 安全 -->
+        <dependency>
+        	<groupId>com.hzcf</groupId>
+			<artifactId>HJ-Security</artifactId>
 			<version>1.0</version>
         </dependency>
 
