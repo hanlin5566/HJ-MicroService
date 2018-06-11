@@ -1,4 +1,4 @@
-package com.hzcf.operation.base.result;
+package com.hzcf.base.result;
 
 import com.alibaba.fastjson.JSONObject;
 

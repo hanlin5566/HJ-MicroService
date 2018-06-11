@@ -1,6 +1,6 @@
-package com.hzcf.operation.base.result;
+package com.hzcf.base.result;
 
-import com.hzcf.common.base.enums.EnumType;
+import com.hzcf.base.enums.EnumType;
 
 /**
  * Create by hanlin on 2017年11月6日
@@ -22,7 +22,8 @@ public enum ResponseCode implements EnumType{
 	GONE (410,"已失效"),
 	INTERNAL_SERVER_ERROR(500, "系统内部错误"),
 	BAD_GATEWAY(502, "错误的网关"),
-	GATEWAY_TIMEOUT(502, "网关超时")
+	SERVICE_UNAVAILABLE(503, "服务不可用"),
+	GATEWAY_TIMEOUT(504, "网关超时")
 	;
 	private final int code;
     private final String text;

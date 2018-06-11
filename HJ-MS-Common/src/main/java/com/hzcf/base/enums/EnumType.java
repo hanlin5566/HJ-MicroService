@@ -1,4 +1,4 @@
-package com.hzcf.common.base.enums;
+package com.hzcf.base.enums;
 
 /**
  * Create by hanlin on 2017年11月6日
