@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hzcf.operation.base.result.ResponseCode;
-import com.hzcf.operation.base.result.ResponseData;
+import com.hzcf.base.result.ResponseCode;
+import com.hzcf.base.result.ResponseData;
 import com.hzcf.service.MS_RuleEngineService;
 import com.hzcf.service.MS_VariableService;
 @RestController

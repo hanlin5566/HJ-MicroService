@@ -24,3 +24,7 @@
 /.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/segments.gen
 /.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/segments_7
 /.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/write.lock
+.recommenders
+*.classpath
+*.gitignore
+*.prefs
