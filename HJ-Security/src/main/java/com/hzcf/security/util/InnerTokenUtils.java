@@ -36,7 +36,6 @@ public class InnerTokenUtils {
      * 刷新Token
      */
     public void reloadApiToken() {
-		System.out.println(System.currentTimeMillis());
         while (StringUtils.isEmpty(token)) {
             try {
                 Thread.sleep(1000);

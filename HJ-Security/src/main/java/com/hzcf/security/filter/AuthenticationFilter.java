@@ -14,11 +14,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.hzcf.operation.base.result.ResponseData;
+import com.hzcf.base.misc.ConstantLogInfo;
+import com.hzcf.base.result.ResponseData;
+import com.hzcf.security.util.IPUtils;
 import com.hzcf.security.util.JWTUtils;
 
 import io.jsonwebtoken.Claims;
@@ -27,7 +31,7 @@ import io.jsonwebtoken.Claims;
  **/
 @Component
 public class AuthenticationFilter implements Filter{
-	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private JWTUtils jwtUtils;
 	
@@ -55,6 +59,7 @@ public class AuthenticationFilter implements Filter{
 			if (StringUtils.isEmpty(token)) {
 				PrintWriter print = httpResponse.getWriter();
 				print.write(ResponseData.failByUnauthorized().toString());
+				logger.debug(ConstantLogInfo.TOEKN_ERROR,uri,IPUtils.getIpAddress(httpRequest));
 				return;
 			}
 			try {
@@ -73,6 +78,7 @@ public class AuthenticationFilter implements Filter{
 //			} 
 			catch (Exception e) {
 				httpResponse.getWriter().write(ResponseData.failByUnauthorized().toString());
+				logger.debug(ConstantLogInfo.TOEKN_ERROR,uri,IPUtils.getIpAddress(httpRequest));
 			}
 			return;
         }
