@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hzcf.auth.dao.entity.UserEntity;
 import com.hzcf.auth.service.AuthService;
-import com.hzcf.operation.base.result.ResponseCode;
-import com.hzcf.operation.base.result.ResponseData;
+import com.hzcf.base.result.ResponseCode;
+import com.hzcf.base.result.ResponseData;
 import com.hzcf.security.util.JWTUtils;
 /**
  * Create by hanlin on 2018年5月24日
