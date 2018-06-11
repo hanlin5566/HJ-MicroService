@@ -5,7 +5,7 @@
 
 	<groupId>com.hzcf</groupId>
 	<artifactId>HJ-Getway</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>HJ-Getway</name>
@@ -38,6 +38,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- 配置中心客户端 -->
+		<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+     	<!-- 安全 -->
+        <dependency>
+        	<groupId>com.hzcf</groupId>
+			<artifactId>HJ-Security</artifactId>
+			<version>1.0</version>
+        </dependency>
+        
+        <!-- 统一的基础配置 -->
+		<dependency>
+			<groupId>com.hzcf</groupId>
+			<artifactId>HJ-Common-Config</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 

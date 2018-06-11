@@ -46,6 +46,13 @@
 			<artifactId>HJ-Security</artifactId>
 			<version>1.0</version>
         </dependency>
+        
+        <!-- 统一的基础配置 -->
+		<dependency>
+			<groupId>com.hzcf</groupId>
+			<artifactId>HJ-Common-Config</artifactId>
+			<version>1.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -83,6 +90,10 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>hz_maven_repositories</id>
+			<url>http://192.168.1.104:8071/repository/hz_maven_repositories/</url>
 		</repository>
 	</repositories>
 

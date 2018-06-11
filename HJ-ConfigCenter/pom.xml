@@ -5,7 +5,7 @@
 
 	<groupId>com.hzcf</groupId>
 	<artifactId>HJ-ConfigCenter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>HJ-ConfigCenter</name>
 	<!-- 修改parent支持eureka client -->
@@ -38,6 +38,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- 统一的基础配置 -->
+		<dependency>
+			<groupId>com.hzcf</groupId>
+			<artifactId>HJ-Common-Config</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 

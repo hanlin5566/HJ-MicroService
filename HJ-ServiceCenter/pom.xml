@@ -40,16 +40,12 @@
             </exclusions>
 		</dependency>
 		
+		<!-- 引用actuator系统监控 -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         
-        <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		
 		 <!--启用undertow容器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -61,6 +57,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 统一的基础配置 -->
+		<dependency>
+			<groupId>com.hzcf</groupId>
+			<artifactId>HJ-Common-Config</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>
