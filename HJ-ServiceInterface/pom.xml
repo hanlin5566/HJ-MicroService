@@ -31,8 +31,18 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+		</dependency>
+		<!-- 监控页面 -->
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator</artifactId>
+    	</dependency>
+		
+		<dependency>
 			<groupId>com.hzcf</groupId>
-			<artifactId>HJ-MS-Common</artifactId>
+			<artifactId>HJ-Security</artifactId>
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
