@@ -1,12 +1,15 @@
 # HJ-MicroService
-基于SpringCloud的微服务项目，目前还在探索中。欢迎访问个人博客 [翰林小院](www.huhanlin.com)，或者加入QQ:545713160 群一起交流。/<br>
+## 项目简介
+基于SpringCloud的微服务项目，目前还在探索中。/<br>
+## 联系方式
+欢迎访问个人博客 [翰林小院](www.huhanlin.com)，或者加入QQ:545713160 群一起交流。/<br>
 
-已完成事项
-1.eureka注册中心-->TODO:元数据管理,用于灰度、监控等。
-2.springcloudconfig配置中心-->TODO:一下散落基础配置的统一管理
-3.security
-4.基于fiegn业务接口封装
-5.鉴权中心
+## 已完成事项
+* 1.eureka注册中心-->TODO:元数据管理,用于灰度、监控等。
+* 2.springcloudconfig配置中心-->TODO:一下散落基础配置的统一管理
+* 3.security
+* 4.基于fiegn业务接口封装
+* 5.鉴权中心
 
 进行中
 1.基于zuul的网关-->TODO:灰度方案
