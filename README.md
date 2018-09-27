@@ -3,7 +3,7 @@
 基于SpringCloud的微服务项目，目前还在探索中。<br>
 ![architecture](http://huhanlin.com/wp-content/uploads/2018/06/hanson_architecture-1.png "logic_architecture")  
 ## 联系方式
-欢迎访问个人博客，或者加入QQ:545713160 群一起交流。<br>
+欢迎访问[个人博客](http://huhanlin.com/)，或者加入QQ:545713160 群一起交流。<br>
 
 ## 已完成事项
 * 1.eureka注册中心<br>
