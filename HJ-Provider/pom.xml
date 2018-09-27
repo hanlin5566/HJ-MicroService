@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.hzcf</groupId>
-	<artifactId>provider</artifactId>
+	<artifactId>HJ-Provider</artifactId>
 	<version>1.0</version>
 
 	<name>HJ-Provider</name>
@@ -13,7 +14,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.10.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -21,9 +22,32 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Edgware.SR2</spring-cloud.version>
+		<spring-boot-admin.version>1.5.7</spring-boot-admin.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>4.8</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<!-- eureka 客户端 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -31,26 +55,34 @@
 		</dependency>
 		<!-- 配置中心客户端 -->
 		<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-     	<!--    服务接口 -->
-        <dependency>
-        	<groupId>com.hzcf</groupId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<!-- 服务接口 -->
+		<dependency>
+			<groupId>com.hzcf</groupId>
 			<artifactId>HJ-ServiceInterface</artifactId>
 			<version>1.0</version>
-        </dependency>
-     	<!-- 安全 -->
-        <dependency>
-        	<groupId>com.hzcf</groupId>
+		</dependency>
+		<!-- 安全 -->
+		<dependency>
+			<groupId>com.hzcf</groupId>
 			<artifactId>HJ-Security</artifactId>
 			<version>1.0</version>
-        </dependency>
-        
-        <!-- 统一的基础配置 -->
+		</dependency>
+
+		<!-- 统一的基础配置 -->
 		<dependency>
 			<groupId>com.hzcf</groupId>
 			<artifactId>HJ-Common-Config</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+		<!-- 优雅停机 -->
+		<dependency>
+			<groupId>com.hzcf</groupId>
+			<artifactId>HJ-GracefulShutdown</artifactId>
 			<version>1.0</version>
 		</dependency>
 
@@ -70,6 +102,14 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -79,7 +119,30 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+				</configuration>
+			</plugin>
+
 		</plugins>
+		<!-- maven resource filter 可以在打包时将properties文件的值替换为maven的值 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 	<repositories>
@@ -93,7 +156,7 @@
 		</repository>
 		<repository>
 			<id>hz_maven_repositories</id>
-			<url>http://192.168.1.104:8071/repository/hz_maven_repositories/</url>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 

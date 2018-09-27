@@ -37,7 +37,7 @@
 	<distributionManagement>
 		<repository>
 			<id>hz_3rd_repositories</id>
-			<url>http://192.168.1.104:8071/repository/hz_3rd_repositories/</url>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
 	</distributionManagement>
 </project>
