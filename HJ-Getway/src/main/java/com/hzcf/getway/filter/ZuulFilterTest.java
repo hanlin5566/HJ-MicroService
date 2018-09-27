@@ -1,23 +1,10 @@
 package com.hzcf.getway.filter;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
-import com.hzcf.base.misc.ConstantLogInfo;
-import com.hzcf.base.result.ResponseData;
-import com.hzcf.security.util.IPUtils;
-import com.hzcf.security.util.JWTUtils;
 import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
-
-import io.jsonwebtoken.Claims;
-
-import org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter;
 
 /**
  * Create by hanlin on 2018年5月30日
@@ -25,8 +12,6 @@ import org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter;
 @Component
 public class ZuulFilterTest extends ZuulFilter {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired
-	private JWTUtils jwtUtils;
 
 	/**
 	 * shouldFilter：返回一个boolean类型来判断该过滤器是否要执行，所以通过此函数可实现过滤器的开关。
@@ -44,8 +29,13 @@ public class ZuulFilterTest extends ZuulFilter {
 	 */
 	@Override
 	public Object run() {
-		double a = 100/0;
-		return null;
+		try {
+			double a = 100/0;
+			return a;
+		} catch (Exception e) {
+			logger.error("zuul异常",e);
+			throw e;
+		}
 	}
 
 	/**

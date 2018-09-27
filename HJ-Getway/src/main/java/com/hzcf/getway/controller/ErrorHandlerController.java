@@ -9,12 +9,10 @@ import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hzcf.base.misc.ConstantLogInfo;
-import com.hzcf.base.result.ResponseCode;
-import com.hzcf.base.result.ResponseData;
 import com.hzcf.security.util.IPUtils;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
 
 /**
  * Create by hanlin on 2018年6月5日
@@ -33,12 +31,38 @@ public class ErrorHandlerController implements ErrorController {
     @RequestMapping("/error")  
     public Object error(HttpServletRequest request, HttpServletResponse response){  
     	RequestContext ctx = RequestContext.getCurrentContext(); 
-        ZuulException exception = (ZuulException)ctx.getThrowable(); 
-        logger.error(ConstantLogInfo.ZUUL_ROUTER_ERROR,exception.getCause(),exception.errorCause,IPUtils.getIpAddress(request));
-        Integer status = (Integer)request.getAttribute("javax.servlet.error.status_code");  
-        ResponseData fail = ResponseData.fail(ResponseCode.codeOf(status));
-        fail.setData(exception.errorCause);
-        return fail;
+//        Integer status = (Integer)request.getAttribute("javax.servlet.error.status_code");  
+        String message = "系统繁忙,请稍后再试";
+        if (ctx.containsKey("throwable")) {
+            Throwable e = (Exception) ctx.get("throwable");
+            Throwable re = getOriginException(e);
+            if(re instanceof java.net.ConnectException){
+                message = "Real Service Connection refused";
+                logger.warn("uri:{},error:{}" ,request.getRequestURI(),re.getMessage());
+            }else if(re instanceof java.net.SocketTimeoutException){
+                message = "Real Service Timeout";
+                logger.warn("uri:{},error:{}" ,request.getRequestURI(),re.getMessage());
+            }else if(re instanceof com.netflix.client.ClientException){
+                message = re.getMessage();
+                logger.warn("uri:{},error:{}" ,request.getRequestURI(),re.getMessage());
+            }else{
+            	message = re.getMessage();
+                logger.warn("Error during filtering",e);
+            }
+            logger.error(ConstantLogInfo.ZUUL_ROUTER_ERROR,re.getMessage(),request.getRequestURI(),IPUtils.getIpAddress(request));
+        }
+        JSONObject ret = new JSONObject();
+        ret.put("errorReturn", message);
+		ret.put("state", 1);
+        return ret;
     }  
+    
+    private Throwable getOriginException(Throwable e){
+        e = e.getCause();
+        while(e.getCause() != null){
+            e = e.getCause();
+        }
+        return e;
+    }
   
 }  

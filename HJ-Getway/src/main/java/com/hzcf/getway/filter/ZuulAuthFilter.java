@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -25,6 +27,9 @@ public class ZuulAuthFilter extends ZuulFilter {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private JWTUtils jwtUtils;
+	
+	@Value("${hj.secrity.disable}")
+	public boolean disable;
 
 	/**
 	 * shouldFilter：返回一个boolean类型来判断该过滤器是否要执行，所以通过此函数可实现过滤器的开关。
@@ -32,7 +37,7 @@ public class ZuulAuthFilter extends ZuulFilter {
 	 */
 	@Override
 	public boolean shouldFilter() {
-		return false;
+		return !disable;
 	}
 
 	/*
@@ -46,6 +51,10 @@ public class ZuulAuthFilter extends ZuulFilter {
 		HttpServletRequest httpRequest = ctx.getRequest();
 		String token = httpRequest.getHeader("Authorization");
 		String uri = httpRequest.getRequestURI();
+		//如果为登录请求则放行
+		if("/hj-authentication/auth".equals(uri) && "POST".equals(httpRequest.getMethod())) {
+			return null;
+		}
 		// 验证TOKEN
 		if (StringUtils.isEmpty(token)) {
 			ctx.setSendZuulResponse(false);
@@ -77,7 +86,7 @@ public class ZuulAuthFilter extends ZuulFilter {
 	 */
 	@Override
 	public String filterType() {
-		return "pre";
+		return FilterConstants.PRE_TYPE;
 	}
 
 	/**
@@ -85,7 +94,7 @@ public class ZuulAuthFilter extends ZuulFilter {
 	 */
 	@Override
 	public int filterOrder() {
-		return 1;
+		return 0;
 	}
 
 }

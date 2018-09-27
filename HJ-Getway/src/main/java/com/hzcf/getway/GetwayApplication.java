@@ -2,6 +2,7 @@ package com.hzcf.getway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +16,7 @@ import com.hzcf.security.filter.AuthenticationFilter;
  **/
 @EnableZuulProxy
 @EnableDiscoveryClient
+@EnableCircuitBreaker
 @SpringBootApplication()
 //因为有些共用类是放在了com.hzcf.xxx.所以需要制定扫描起始位置，或者把此类放到com.hzcf下。
 //关闭自动刷新token
