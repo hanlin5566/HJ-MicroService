@@ -13,10 +13,11 @@
 * 5.鉴权中心 <br>
 * 6.灰度方案--请访问 [翰林小院--灰度方案](http://huhanlin.com/2018/06/15/springcloud-%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%E6%96%B9%E6%A1%88/)<br>
 * 7.灰度发布--多版本路由
-* 8.基于hystrix的熔断机制
-* 9.sluth链路追踪
-* 10.Turbine监控聚合
-* 11.服务健康监控 --spring admin
+* 8.灰度发布--优雅停机
+* 9.基于hystrix的熔断机制
+* 10.sluth链路追踪
+* 11.Turbine监控聚合
+* 12.服务健康监控 --spring admin
 ## 进行中
 * 1. <br>
 
