@@ -17,10 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.hzcf.base.misc.ConstantLogInfo;
+import com.hzcf.base.result.ResponseCode;
 import com.hzcf.base.result.ResponseData;
 import com.hzcf.security.util.IPUtils;
 import com.hzcf.security.util.JWTUtils;
@@ -34,6 +36,9 @@ public class AuthenticationFilter implements Filter{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private JWTUtils jwtUtils;
+	
+	@Value("${hj.secrity.disable}")
+	public boolean disable;
 	
 	//白名单
 	private List<String> whiteList =  Arrays.asList("/auth","/info");
@@ -51,15 +56,15 @@ public class AuthenticationFilter implements Filter{
         httpResponse.setContentType("application/json; charset=utf-8"); 
         String token = httpRequest.getHeader("Authorization");
         String uri = httpRequest.getRequestURI();
-        if(whiteList.contains(uri)){
-        	//白名单
+        if(whiteList.contains(uri) || disable){
+        	//白名单或关闭鉴权则放行
         	chain.doFilter(request, response);
         }else{
         	//验证TOKEN
 			if (StringUtils.isEmpty(token)) {
 				PrintWriter print = httpResponse.getWriter();
 				print.write(ResponseData.failByUnauthorized().toString());
-				logger.debug(ConstantLogInfo.TOEKN_ERROR,uri,IPUtils.getIpAddress(httpRequest));
+				logger.info(ConstantLogInfo.TOEKN_ERROR,uri,IPUtils.getIpAddress(httpRequest));
 				return;
 			}
 			try {
@@ -67,7 +72,6 @@ public class AuthenticationFilter implements Filter{
 				//TODO:无异常则能获取到token中的内容作出相应逻辑，并跳转
 				claims.getSubject();
 //				String uid = claims.get("uid",String.class);
-				chain.doFilter(httpRequest, response);
 			} 
 //			catch (ExpiredJwtException e) {
 //				// 在解析JWT字符串时，如果‘过期时间字段’已经早于当前时间，将会抛出ExpiredJwtException异常，说明本次请求已经失效
@@ -78,7 +82,15 @@ public class AuthenticationFilter implements Filter{
 //			} 
 			catch (Exception e) {
 				httpResponse.getWriter().write(ResponseData.failByUnauthorized().toString());
-				logger.debug(ConstantLogInfo.TOEKN_ERROR,uri,IPUtils.getIpAddress(httpRequest));
+				logger.error(ConstantLogInfo.TOEKN_ERROR,uri,IPUtils.getIpAddress(httpRequest));
+				return;
+			}
+			try {
+				chain.doFilter(httpRequest, response);
+			} catch (Exception e) {
+				httpResponse.getWriter().write(ResponseData.fail(ResponseCode.INTERNAL_SERVER_ERROR).toString());
+				logger.error(ConstantLogInfo.INTERNAL_SERVER_ERROR,e.getMessage(),uri,IPUtils.getIpAddress(httpRequest));
+				return;
 			}
 			return;
         }
