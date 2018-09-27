@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.hanson.gray.ribbon.support.HansonRuleAutoConfiguration,\
+com.hanson.gray.ribbon.support.MetadataAwareZuulFilterConfiguration,\
+com.hanson.gray.ribbon.support.MetadataAwareInteceptorConfiguration
