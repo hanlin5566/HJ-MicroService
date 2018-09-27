@@ -28,3 +28,8 @@
 *.classpath
 *.gitignore
 *.prefs
+/HJ-Getway/bin/src/main/java/com/hzcf/getway/*.class
+/HJ-Getway/bin/src/main/java/com/hzcf/getway/filter/*.class
+/Hanson-MetadataAware/.mvn/wrapper/maven-wrapper.jar
+/Hanson-MetadataAware/.mvn/wrapper/maven-wrapper.properties
+/Hanson-MetadataAware/.mvn/wrapper/*.jar
