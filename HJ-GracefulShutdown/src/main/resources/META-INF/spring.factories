@@ -1,0 +1,5 @@
+#注册autoconfig,可以解析多个jar中的spring.factories
+#如果配置了@ComponentScan扫描路径与autoconfig在同一路径，则此类会提前加载，config类中引用的其他bean会未初始化。
+#如果需要解决此问题，严格按照autoconfig与starter写法，后续会介绍。
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.hanson.graceful.configuration.GracefulShutdownAutoConfiguration
